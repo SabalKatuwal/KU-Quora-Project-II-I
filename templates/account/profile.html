@@ -1,0 +1,94 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+<div class="profile-main-container">
+    <div class="profile-main">
+        <div class="primary">
+            <div class="image">
+                <!-- this img url is not working nicely .... rewrite the url -->
+               <img src="/media/{{User.profile.profile_pic}}" alt="">
+                <ul class="options">
+                    {% if request.user == User %}
+                        <li><a href="{% url 'profileEdit' User.id %}">Edit profile</a></li>
+                    {% endif %}
+                    <li><a target = '_blank' href="/media/{{User.profile.profile_pic}}">View Profile Image</a></li>
+                </ul>
+            </div> 
+        </div>
+        <div class="info-container">
+            <div class="info">
+                <h1>{{User.first_name}} {{User.last_name}}</h1>
+                <span>@{{User.username}}</span>
+                <p>
+                    {% if User.profile.designation %}
+                        {{User.profile.designation}}
+                    {% endif %}
+                </p>
+                <div class="social-media-links">
+                    {% if User.profile.fb_link %}
+                        <a href="{{User.profile.fb_link}}"><div class="fb">
+                            <i class="fab fa-facebook"></i>
+                        </div></a>
+                    {% endif %}
+                    {% if User.profile.twitter_link %}
+                        <a href="{{User.profile.twitter_link}}"><div class="twitter">
+                            <i class="fab fa-twitter"></i>
+                        </div></a>
+                    {% endif %}
+
+                    {% if User.profile.linkedin_link %}
+                        <a href="{{User.profile.linkedin_link}}"><div class="linkdin">
+                            <i class="fab fa-linkedin"></i>
+                        </div></a>
+                    {% endif %}
+
+                </div>
+                <div class="followings">
+                    <div class="following">
+                        <span>Following</span>
+                        <span class="count">{{ followings }}</span>
+                    </div>
+                    <div class="follower">
+                        <span>Followers</span>
+                        <span class="count">{{ followers }}</span>
+                    </div>
+                </div>
+            </div>
+            {% if selfProfile != 1 %}
+            <div class="button">
+                <button data-url="{% url 'follow' %}" value = '{{User.id}}' class = "
+                {% if already_following %}
+                    followed
+                 {% endif %}
+                ">
+                {% if already_following %}
+                    Following
+                {% else %}
+                    Follow
+                {% endif %}
+            </button>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="posts">
+
+    {% for post in posts %}
+    <div class="post">
+
+        {% include 'ku_quora/post_template.html' %}
+    </div>
+    {% endfor %}
+    
+</div>
+
+
+
+{% endblock %}

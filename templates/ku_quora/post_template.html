@@ -1,0 +1,187 @@
+{% load profanity %}
+ <div class="blog-post">
+    <div class="header">
+        <div class="profile">
+            <a href="{% url 'profile' post.user.id %}"><img src="/media/{{post.user.profile.profile_pic}}" alt="" ></a>
+        </div>
+        <div>
+            <span class="author">{{post.user.username}}</span>
+            <span class="time-stamp">{{post.posted_on}}</span>
+        </div>
+    </div>
+    <div class="body">
+        <h2 class = "title"><a href="{{post.get_absolute_url}}">{% with string=post.title %} {{ string|censor }}  {% endwith%}</a></h1>
+        <span class="tags">
+           {% for tag  in post.tags.all %}
+                <a href="{{tag.get_absolute_url }}">#{% with string=tag.title %} {{ string|censor }}  {% endwith%}</a>
+           {% endfor %}
+        </span>
+        <div class="text"> 
+            {% with string=post.body %} {{ string|censor }}  {% endwith%}
+        </div>
+    </div>
+    <div class="images">
+            {% for image in images %}
+                {% if image.post == post %}
+                <div class="image">
+                    <a href="/media/{{image.image}}" target = "_blank" ><img src="/media/{{image.image}}" alt=""></a>
+                </div>
+                {% endif %} 
+            {% endfor %}
+    </div>
+
+    <div id = "footer" class="footer">
+        <div class="buttons">
+            <a href = "{% url 'post_detail' post.id %}#footer"><div class="comment">
+                <i class="fas fa-comment"></i>
+                <span class="count">{{post.get_total_answer_count}}</span>
+            </div></a>
+            <div class="options">
+                <div><i class="fas fa-ellipsis-h"></i></div>
+                <ul data-status = 'collapsed'>
+                    {% if request.user == post.user %}
+                        <a href="{% url 'post_edit' post.id%}"><li><i class="fas fa-pen"></i>Edit</li></a>
+                        {% csrf_token %}
+                        <li data-post-id = {{post.id}} class = "deletePostBtn"><i class="fas fa-trash"></i>delete post</li>
+                    {% endif %}
+                    {% csrf_token %}
+                   <li data-post-id = {{post.id}} class = "savePostBtn"><i data-post-id = {{post.id}} class="fas fa-save"></i>
+                        <span>
+                            {% if post.id in saved_post_ids %}
+                                 unsave
+                            {% else %}
+                                save
+                            {% endif %}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    {% if inDetailView %}
+    <div class="answersForm">
+        <form action="">
+            {% csrf_token %}
+            <textarea name="answer" placeholder = "Write your answer here... "id="" cols="30" rows="7" required></textarea>
+            <input type="file" id = "images" accept="image/png, image/gif, image/jpeg" onchange = "previewImage()" multiple>
+            <label title = "Insert images" for="images">
+                <i class="fas fa-image"></i>
+                <i class="fas fa-plus"></i>
+            </label>
+            <input class = "post_id" id = "images" type="hidden" value = "{{post.id}}">
+            <button>post answer</button>
+        </form>
+        <div class="previewImageContainer">
+            
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% if inDetailView %}
+
+<div class="all-answers">
+
+    <h2>Answers:</h2>
+
+    {%if not answers.all%}
+        <div class = "noAnswer">No answer yet. Be the first to answer</div>
+    {% else %}
+        {% for answer in answers.all %}
+            <div class="answer-container" id = "{{answer.ansID}}">  
+                    <div class="header">
+                        <div class="profile">
+                            <a href="{% url 'profile' answer.user.id %}"><img src="/media/{{answer.user.profile.profile_pic}}" alt="sdf"></a>
+                        </div>
+                        <div>
+                            <span class="author">{{answer.user.username}}</span>
+                            <span class="time-stamp">{{answer.time}}</span>
+                        </div>
+                    </div>
+                    <div class="body">
+                        {% with string=answer.body %} {{ string|censor }}  {% endwith%}
+
+                    </div>
+                    <div class="images">
+                        {% for image in answerImages %}
+                            {% if image.answer == answer %}
+                                <a href="/media/{{image.image}}" target="_blank"><img src="/media/{{image.image}}" alt=""></a>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+                <div class="footer">
+                    <div data-answerId = "{{answer.ansID}}" class="upVote">
+                        {% csrf_token %}
+                        <i class="fas fa-thumbs-up
+                        
+                        {% if answer.ansID in UpVotedAnswerIds %}
+                            upVoted
+                        {% endif %}
+
+                        "></i>
+                        <span class="count">{{answer.get_total_upVotes}}</span>
+                    </div>
+                    {% if request.user == answer.user %}
+                    <div class="options">
+                        <div><i class="fas fa-ellipsis-h"></i></div>
+                        <ul data-status = 'collapsed'>
+                            <li>
+                                <form action="/deleteAnswer/" method = "POST">
+                                    {% csrf_token %}
+                                    <button value = "{{answer.ansID}}" name = "button">
+                                        <i class="fas fa-trash"></i>delete answer</li>
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div> 
+                    {% endif %}
+                </div>
+            
+            <!-- comment fomr -->
+                <form id = "post_comment_form" action="/postComment/" method = "post">
+                    {% csrf_token %}
+                    <input type="text" class = "trigger" value = "write comment here...." readonly>
+                    <div>
+                        <textarea name="comment_body" id="" cols="30" rows="5"></textarea>
+                        <input type="hidden" name = "answerId" value = "{{answer.ansID}}">
+                        
+                        <input type="submit">
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="post-comments-all">
+                {% for comment in comments %}
+                    {% if comment.answer.ansID == answer.ansID %}
+                    <div class="comment">
+                        <div class="top">
+                            <div class="profile">
+                                <img src="/media/{{comment.user.profile.profile_pic}}" alt="">
+                            </div>
+                            <div class="data">
+                                <span class="username">
+                                    {{comment.user.username}}
+                                </span>
+                                <span class="date">
+                                    {{comment.time}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="body">
+                            {% with string=comment.body %} {{ string|censor }}  {% endwith%}
+
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+ </div>
+
+
+{% endif %}

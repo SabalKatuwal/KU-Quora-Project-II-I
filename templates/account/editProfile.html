@@ -1,0 +1,49 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+    <div class="edit_profile_form_container">
+        <form id = "edit_profile_form" action="" method = 'POST' enctype="multipart/form-data">
+            {% csrf_token %}
+           
+            <div class="field profile_pic" title = "change profile pic">
+                <img  src="/media/{{request.user.profile.profile_pic}}" alt="">
+                <label for ="profile_pic"><i class="fas fa-plus"></i></label>
+                <input type="file" id = "profile_pic" name='profile_pic' onchange = "previewProfileChange()">
+                <div class = "username">
+                    @{{request.user.username}}
+                </div>
+            </div> 
+
+            <div class="fields">
+                <div class="field">
+                    <label for ="first_name">First Name :</label>
+                    <input type="text" id = "first_name" name='first_name' value = "{{ request.user.first_name }}">
+                </div> 
+                <div class="field">
+                    <label for ="last_name">Last Name :</label>
+                    <input type="text" id = "last_name" name='last_name' value = "{{ request.user.last_name }}">
+                </div> 
+                <div class="field">
+                    <label for ="">designation :</label>
+                    <input type="text" name='designation' value = "{% if request.user.profile.designation != None %}{{request.user.profile.designation}}{% endif %}" >
+                </div>
+                <div class="field">
+                    <label for ="">fb_link :</label>
+                    <input type="text" name='fb_link' value = "{% if request.user.profile.fb_link != None %}{{request.user.profile.fb_link}}{% endif %} " >
+                </div>
+                <div class="field">
+                    <label for ="">twitter_link :</label>
+                    <input type="text" name='twitter_link' value = "{% if request.user.profile.twitter_link != None %}{{request.user.profile.twitter_link}}{% endif %} " >
+                </div>
+                <div class="field">
+                    <label for ="">linkedin_link :</label>
+                    <input type="text" name='linkedin_link' value = "{% if request.user.profile.linkedin_link != None %}{{request.user.profile.linkedin_link}}{% endif %} " >
+                </div>
+            </div>
+
+            <input type="submit" value = "Confirm Edit">
+        </form>
+    </div>
+
+{% endblock %}

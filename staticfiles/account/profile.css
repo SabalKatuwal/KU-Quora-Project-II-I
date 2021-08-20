@@ -1,0 +1,157 @@
+
+.profile-main-container{
+    background-color:white;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10em;
+    /* border-radius:10px; */
+}
+
+
+.profile-main{
+    display:flex;
+    flex-direction:column ;
+    margin:1em auto;
+    padding:2em 0;
+    width:90%;
+    max-width:700px;
+}
+
+.profile-main .primary .image{
+    height:150px;
+    width:150px;
+    border:5px solid white;
+    box-shadow:1px 7px 15px rgb(209, 209, 209);
+    border-radius:50%;
+    position:relative;
+    cursor:pointer;
+}
+
+.profile-main .image img{
+    height:100%;
+    width:100%;
+    object-fit: cover;
+    border-radius:50%;
+
+}
+
+.profile-main .primary .image:hover ul.options{
+   visibility: visible;
+}
+
+
+.profile-main .primary ul.options{
+    border-radius:0 10px 10px 10px;
+    background-color:var(--post);
+    box-shadow:4px 4px 30px rgb(206, 206, 206);
+    padding:2em;
+    z-index:99999;
+    width:180px;
+    left:5em;
+    top:-2em;
+    visibility: hidden;
+}
+
+.profile-main .primary ul.options li{
+    white-space: nowrap;
+    list-style:none;
+    padding:.5em 0 ;
+}
+.profile-main >*{
+    /* border:1px solid black; */
+}
+
+.profile-main .primary{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    padding:3em 0 2em;
+
+}
+
+.profile-main .button button{
+    font-size:1rem;
+    padding:.3em 2em;
+    margin-top:1.5em;
+    border:none;
+    cursor:pointer;
+}
+
+.profile-main  .button button{
+    background-color:rgb(250, 155, 32);
+    color:white;
+    font-weight:bold;
+    box-shadow:4px 3px 10px rgb(207, 207, 207);
+
+}
+.profile-main  .button button.followed{
+   background:transparent;
+   border:1px solid rgb(206, 206, 206);
+   color:black;
+}
+
+.profile-main .info{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-main .social-media-links,
+.profile-main .followings{
+    display:flex;
+}
+
+
+.profile-main .info >*{
+    /* border:1px solid red; */
+}
+
+.profile-main .info p{
+    margin:.4em 0;
+    font-size:.9rem;
+}
+
+.profile-main .social-media-links{
+    width:50%;
+    justify-content: space-around;
+    margin:.3em 1em 1.6em;
+}
+.profile-main .social-media-links >*{
+    cursor:pointer;
+    text-decoration:none;
+    color:black;
+    font-size:1.3rem;
+}
+
+.profile-main .followings >div{
+    margin:0 1em;
+}
+
+.profile-main .info-container{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+
+@media only screen and (min-width:760px){
+
+    .profile-main{
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .profile-main .primary{
+        padding:0 1em;
+    }
+    .profile-main >*{
+        flex-grow:1;
+    }
+    .profile-main .info-container{
+        /* flex-grow:2; */
+    }
+
+
+}
+

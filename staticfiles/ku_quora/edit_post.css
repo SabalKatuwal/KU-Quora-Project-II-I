@@ -1,0 +1,71 @@
+form#edit_post_form{
+    margin-top:8em;
+}
+form#edit_post_form .images{
+    /* border:1px solid red; */
+    margin-top:2em;
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap:wrap;
+}
+
+form#edit_post_form .images .image img{
+    height:150px;
+    margin-right:.5em;
+}
+form#edit_post_form .images .image{
+    position:relative;
+    margin:1em;
+}
+form#edit_post_form .images .recently-added-images{
+    display: flex;
+    align-items: center;
+}
+form#edit_post_form .images .image i.fa-times{
+    position:absolute;
+    top:-.5em;
+    right:-.5em;
+    cursor:pointer;
+}
+form#edit_post_form .images > .removed{
+    display:none;
+}
+form#edit_post_form .field{
+    margin:1em 0;
+    display:flex;
+
+}
+form#edit_post_form .field label{
+    width:20%;
+
+}
+
+form#edit_post_form .field label[for="add-image"] i.fa-image{
+    font-size:2.2rem;
+    margin-right:.2em;
+    cursor:pointer;
+}
+form#edit_post_form .field label[for="add-image"] {
+    display:flex;
+    align-items: center;
+}
+form#edit_post_form .field input , textarea{
+    margin:0em 2em;
+    width:60%;
+    padding:.3em .5em;
+    font-size:1.1rem;
+}
+
+form#edit_post_form  input[type="submit"]{
+    margin:2em 0;
+    background-color:rgb(223, 132, 13);
+    color:white;
+    font-weight:bold;
+    border:none;
+    border-radius:5px;
+    padding:.3em 2em;
+    font-size:1.1rem;
+    cursor:pointer;
+}
+

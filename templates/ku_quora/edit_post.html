@@ -1,0 +1,46 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+    <div class="edit_post_form_container wrapper" enctype="multipart/form-data"  method = 'POST'>
+        <form id = "edit_post_form" action="" method = 'POST' enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for ="title">Title</label>
+                <input type="text" id = "title" name='title' value = "{{ post.title }}">
+            </div> 
+
+            <div class="field">
+                <label for ="body">Body</label>
+                <textarea name="body" id="body" cols="100" rows="10">{{post.body}}</textarea>
+            </div>
+
+            <div class="field">
+                <label for ="tags">tags</label>
+                <input type="text" name='tags' value = "{% for tag in tags %}#{{tag}}{% endfor %}" >
+            </div>
+           <div class="field">
+               <input style = "display :none;" type="file" id = "add-image" name = "images" accept="image/png, image/gif, image/jpeg" onchange = "previewImagePostEdit()" multiple>
+               <label for="add-image">
+                   <i class="fas fa-image"></i>
+                   <i class="fas fa-plus"></i>
+               </label>
+           </div>
+            <div class="images">
+                {% for image in images %}
+                    <div class="image" data-imageId = "{{image.id}}">
+                        <img  src="/media/{{image.image}}" alt="">
+                        <i class="fas fa-times"></i>
+                    </div>
+                {% endfor %}
+                <div class="recently-added-images">
+                    
+                </div>
+            </div>
+
+            <input type="submit" value = "submit">
+        </form>
+    </div>
+
+{% endblock %}

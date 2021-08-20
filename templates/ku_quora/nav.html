@@ -1,0 +1,33 @@
+<nav>
+    <ul class = "wrapper">
+            <li class='logo'><a href="{%url 'index'%}">Ku-Quora</a></li>
+            <ul class="icons">
+                <a href="{%url 'index'%}"><li><i class="fas fa-home"></i></li></a>
+                <a href="{% url 'followings' %}"><li><i class="fas fa-list"></i></li></a>
+                <a href="{% url 'notification' %}"><li class = 'bell-icon'><i class="fas fa-bell"></i>
+                    <span class="notification-count">{{request.user.profile.get_notification_count}}</span>
+                </li></a>
+                <a title = "Saved posts" href=" {% url 'saved' %}"><li><i class="fas fa-save"></i></li></a>
+
+                <form class = "search-box" action="{% url 'search' %} ">
+                    <input type="text" name = "sq" placeholder = 'Search Quora'>
+                   <button>
+                    <i class="fas fa-search"></i>
+                   </button> 
+                </form>
+
+                <div class="profile-icon">
+                    <img src="/media/{{request.user.profile.profile_pic}}" alt="">
+                    <ul class="options">
+                        <li><a href="{% url 'profile' request.user.id %}">{{request.user.username}}</a></li>
+                        <li><a href="{% url 'change_password' %}">Change password</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            </ul>
+    </ul>
+</nav>
+
+<div class="overlay-message">
+    deleted successfully
+</div>

@@ -1,0 +1,113 @@
+
+body{
+    background-color: white;
+}
+
+.Follow-container{
+    /* border:1px solid red; */
+    width:95%;
+    max-width:700px;
+    margin:10em auto 0;
+    background: white;
+}
+
+.Follow-container .header{
+    display:flex;
+    justify-content: space-around;
+    margin-bottom:2em;
+}
+
+.Follow-container .header div{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight:bold;
+    font-size:1.1rem;
+    padding:1em 3em;
+    margin:1em;
+    width:100%;
+    color:rgb(7, 7, 7);
+    cursor:pointer;
+    opacity:.4;
+    box-shadow:3px 3px 5px rgb(160, 160, 160);
+    transition: all .5s ease-out;
+}
+
+.Follow-container .header div:hover{
+    opacity:.8;
+    box-shadow: inset 1px 1px 4px rgb(202, 202, 202);
+}
+
+.Follow-container .header div.active{
+    opacity: 1;
+    box-shadow: inset 1px 1px 4px rgb(202, 202, 202);
+
+}
+
+.profile-image{
+    height:50px;
+    width:50px;
+    border-radius:50%;
+}
+
+.profile-image img{
+    height:50px;
+    width:50px;
+    border-radius:50%;
+}
+
+.user{
+    margin:1em auto;
+    width:80%;
+    padding:.5em;
+    display:flex;
+    align-items:center;
+    box-shadow: 3px 3px 10px rgb(230, 230, 230),
+                -3px -3px 5px white;
+}
+
+.user .profile-image{
+    margin-right:1em;
+}
+
+.user > button{
+    margin-left:auto;
+    padding:.3em 2em;
+    font-size:1rem;
+}
+
+.filter > div{
+    display:none;
+}
+.filter > div.active{
+    display:block;
+}
+
+button.following{
+background:transparent;
+   border:1px solid rgb(206, 206, 206);
+   color:black;
+}
+
+button.not-following{
+    background-color:rgb(250, 155, 32);
+    color:white;
+    font-weight:bold;
+    box-shadow:4px 3px 10px rgb(207, 207, 207);
+    border:none;
+}
+
+.filter .null-message{
+    text-align:center;
+    font-weight:bold;
+    color:red;
+}
+
+.filter .null-message i{
+    font-size:6rem;
+    color:rgb(219, 1, 1);
+}
+
+.filter .null-message .icon{
+    margin-top:1em;
+}

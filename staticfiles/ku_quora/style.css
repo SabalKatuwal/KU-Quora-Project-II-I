@@ -1,0 +1,179 @@
+@import "../common.css";
+
+nav{
+    /* background-color:var(--post); */
+    /* box-shadow:0 4px 10px rgb(240, 240, 240); */
+    height:8vh;
+    display:flex;
+    align-items: center;
+    position:fixed;
+    top:.5em;
+    margin:0 auto;
+    /* border:1px solid red; */
+    width:100%;
+    z-index:999;
+
+}
+
+nav > ul{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    background-color:white;
+    padding:2em;
+    height:100%;
+    font-size:.8rem;
+    border-radius:5em;
+    box-shadow:0 4px 10px rgb(240, 240, 240);
+    
+}
+
+nav ul >*{
+}
+
+nav ul.icons{
+    display:flex;
+    align-items:center;
+}
+
+nav ul.icons >*{
+    margin:0 1em;
+}
+
+nav li.logo{
+    font-size:1.4rem;
+    font-weight:bold;
+    color:black;
+}
+
+
+nav ul li{
+    list-style:none;
+}
+
+nav ul a{
+    text-decoration:none;
+}
+
+nav ul.icons{
+}
+
+nav ul.icons a li i{
+    font-size:1.2rem;
+}
+
+nav ul.icons a li{
+    height:40px;
+    width:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:5px;
+}
+
+nav div.profile-icon{
+    position:relative;
+    cursor:pointer;
+}
+
+nav div.profile-icon img{
+    height:40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+
+}
+
+nav div.profile-icon .options{
+    position:absolute;
+    left:-11em;
+    top:3em;
+    min-width:100px;
+    box-shadow:3px 3px 20px rgb(235, 235, 235);
+    border-radius:5px;
+    padding:2em 0;
+    z-index:9999;
+    background-color: white;
+    visibility:hidden;
+}
+
+nav div.profile-icon .options li {
+    white-space: nowrap;   
+    font-size:1rem; 
+    padding:.5em 2em;   
+}
+nav div.profile-icon .options li a:hover{
+    text-decoration:underline;
+}
+nav div.profile-icon:hover .options{
+    visibility:visible;
+}
+
+nav .bell-icon{
+    position:relative;
+}
+nav .bell-icon span.notification-count{
+    position:absolute;
+    bottom:-.5em;
+    right:-.5em;
+    padding:.5em;
+    color:white;
+    font-weight:bold;
+    background-color:red;
+    height:20px;
+    width:20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+}
+
+nav form.search-box{
+    display:flex;
+}
+nav form.search-box >*{
+    font-size:1rem;
+    padding:.3em .2em;
+}
+nav .search-box button{
+    border:none;
+    background-color:
+    transparent;
+    height:100%;
+    padding:0;
+}
+nav .search-box button > i{
+    background-color:var(--blue);
+    color:white;
+    padding:.5em;
+}
+
+
+.overlay-message{
+    padding:.3em 0;
+    text-align:Center;
+    margin-top:.5em;
+    margin-left:auto;
+    margin-right: auto;
+    color:white;
+    padding:1em 4em;
+    border-radius:5px;
+    background-color: rgb(77, 151, 16);
+    position:fixed;
+    right:1em;
+    display:none;
+    top:1em;
+    z-index:9999;
+}
+
+footer{
+    background-color:var(--post);
+    box-shadow:0 4px 10px rgb(240, 240, 240);
+    height:5vh;
+    width:100vw;
+    position:fixed;
+    left:0;
+    bottom:0;
+    margin-top:10em;
+}
+

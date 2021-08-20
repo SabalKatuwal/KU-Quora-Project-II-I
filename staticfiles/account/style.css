@@ -1,0 +1,134 @@
+
+.wrapper{
+    width:90%;
+    max-width:600px;
+    margin:0 auto;
+}
+
+body{
+    background-color:rgb(248, 248, 248);
+    font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+
+
+
+form{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:10px;
+    padding:1em 3em 3em;
+    background-color:rgb(255, 255, 255);
+    box-shadow:5px 5px 30px rgb(219, 219, 219);
+}
+
+form input{
+    width:100%;
+    padding:.5em;
+    font-size:1.2rem;
+    outline:none;
+    border-radius:2px;
+    border:1px solid var(--border);
+}
+
+
+form > div{
+    margin : 1.8em 0;
+    position:relative;
+}
+
+form > div.valid input{
+    border:1px solid rgb(12, 177, 12);
+}
+
+form > div.valid i.fa-check-circle{
+    visibility: visible;
+}
+
+form > div.invalid input{
+    border:1px solid rgb(184, 12, 12);
+}
+
+form > div.invalid small{
+    visibility: visible;
+    color:rgb(184, 12, 12);
+}
+
+form > div.invalid i.fa-exclamation-circle{
+    visibility: visible;
+}
+
+form div .input{
+    position:relative;
+    margin-top:.5em;
+}
+
+form > div .input i{
+    position:absolute;
+    top:50%;
+    transform:translate(-50%,-50%);
+    right:.5em;
+    font-size:1.1rem;
+    visibility:hidden;
+}
+
+form > div .input i.fa-check-circle{
+    color:rgb(12, 177, 12);
+    
+}
+
+form > div .input i.fa-exclamation-circle{
+    color:rgb(184, 12, 12);
+}
+
+form > div label{
+   margin-bottom:1em;
+   font-weight: bold;
+   opacity:.7;
+}
+
+form > div small{
+    visibility:hidden;
+    position:absolute;
+    margin-top:.3em;
+}
+
+form input:focus{
+    border:1px solid blue;
+}
+
+span.medium{
+    color:black;
+}
+
+form .message{
+}
+form .error{
+    color:rgb(211, 35, 35);
+}
+
+form .success{
+    color:rgb(22, 175, 35);
+}
+
+
+form .header{
+    padding:2em 0em;
+}
+
+form input[type = "submit"]{
+    color:white;
+    border:none;
+    font-size:1.4rem;
+    font-weight:bold;
+    background-color:purple;
+    border-radius:5px;
+    margin:1em 0 .5em;
+}
+
+form > a{
+   display:block;
+    text-align:center;
+}

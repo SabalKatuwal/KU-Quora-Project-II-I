@@ -1,0 +1,81 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block title %}
+notification
+{% endblock %}
+
+
+
+{% block content %}
+{% csrf_token %}
+    <div class="notification-container notification-wrapper">
+       {% for notification in notifications %}
+            <div class="notification 
+
+            {% if notification.is_seen %}
+                notification-seen
+            {% endif %}
+                
+            "
+            data-url = "
+            {% if notification.notification_type == 2 %}
+                {% url 'profile' notification.user_from.id %}
+            {% elif notification.notification_type == 3 %}
+                {% url 'post_detail' notification.post.id %}
+            {% elif notification.notification_type == 5 or notification.notification_type == 1  or notification.notification_type == 4%}
+                {% url 'post_detail' notification.answer.post.id%}#{{notification.answer.ansID}} 
+            {% endif %}
+            "
+
+            data-notification_id = "{{notification.id}}"
+
+            >
+       {% csrf_token %}
+
+                <div class="sender">
+                    <a href="{% url 'profile' notification.user_from.id %}">
+                        <div class="profile-icon">
+                            <img src="/media/{{notification.user_from.profile.profile_pic}}" alt="">
+                        </div>
+                    </a>
+                </div>
+                    <div class="info">
+                        <div class="top">
+                            <div class="title">
+                                {% if notification.notification_type == 2 %}
+                                    New Follower
+                                {% elif notification.notification_type == 3 or notification.notification_type == 4%}
+                                    {{notification.post.title}}
+                                {% elif notification.notification_type == 5%}
+                                    New Comment
+                                {% endif %}
+                            </div>
+                            <div class="time">
+                                {{notification.date}}
+                            </div>
+                        </div>
+                        <div class="text">
+                            {% if notification.notification_type == 1 %}
+                                {{notification.user_from}} liked your answer
+                            {% elif notification.notification_type == 2 %}
+                                {{notification.user_from.username}} started following you
+                            {% elif notification.notification_type == 3 %}
+                                {{notification.user_from.username}} just posted a new question
+                            {% elif notification.notification_type == 4 %}
+                                {{notification.user_from.username}} just answered your question
+                            {% elif notification.notification_type == 5 %}
+                                {{notification.user_from.username}} just commented to your answer
+                            {% endif %}
+                        </div>
+                        
+
+                    </div>
+                    <div class="receiver">
+            
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

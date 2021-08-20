@@ -1,0 +1,82 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block content %}
+{% csrf_token %}
+
+<!-- followings  -->
+<!-- <h1>{{request.user}}</h1> -->
+
+<div class="Follow-container">
+    <div class="header">
+        <div class="followings_count active">
+            <span>Following</span>
+            {{followings.count}}
+        </div>
+        <div class="followers_count ">
+            <span>Follower</span>
+            {{followers.count}}
+        </div>
+    </div>
+    <div class="filter">
+        <div class="following active" >
+            <div>
+                {% if followings %}
+                        {% for u in followings %}
+                        <div class="user" data-url = "{% url 'profile' u.following.id %}">
+                            <div class="profile-image">
+                                <img src="/media/{{u.following.profile.profile_pic}}" alt="">
+                            </div>
+                            <div class="info">
+                                <span>{{u.following.username}}</span>
+                            </div>
+                            <button class = "following">Already Following</button>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class = "null-message">
+                           <div>
+                                You are not following anyone yet!
+                           </div>
+                           <div>
+                            Follow someone to see them on the list
+                           </div>
+                           <div class="icon">
+                               <i class="fas fa-exclamation-triangle"></i>
+                           </div> 
+                        </div> 
+                {% endif %}
+                    </div>
+                </div>
+                <div class="follower ">
+                    <div>
+                        {% if followers %}
+                            {% for u in followers %}
+                            <div class="user" data-url = "{% url 'profile' u.follower.id %}">
+                                <div class="profile-image">
+                                    <img src="/media/{{u.follower.profile.profile_pic}}" alt="">
+                                </div>
+                                <div class="info">
+                                    <span>{{u.follower.username}}</span>
+                                </div>
+                                <button class = "not-following">Follow</button>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class = "null-message">
+                                <div>
+                                    No one is following you yet! 
+                                </div>
+                                <div>
+                                    If someone follows you then they will be listed here.
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div> 
+                            </div> 
+                        {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'ku_quora/base.html' %}
+{% block content %}
+
+<h1 class='tag-banner wrapper'>#{{tag}}</h1>
+
+
+{% for post in posts %}
+{% include 'ku_quora/post_template.html' %}
+{% endfor %}
+
+
+
+
+{% endblock %}

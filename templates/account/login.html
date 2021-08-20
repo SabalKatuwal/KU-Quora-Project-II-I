@@ -1,0 +1,36 @@
+{% extends 'account/base.html' %}
+
+
+{% block content %}
+<form action="" method = "POST" id='signin' class = 'wrapper'>
+    {% csrf_token %}
+    <div class="header ">
+        <h1>Login</h1>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}
+                <span class = "message {{message.tags}}">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+     {% endif %}
+
+     <div class="field" >
+        <label for="username">Username</label> 
+        <div class="input">
+            <input type="text" name = "username" id = "username" required>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="password1">password</label> 
+        <div class="input">
+            <input type="password" name = "password" id = "password1" required>
+        </div>
+    </div>
+
+    <input type="submit" value = "Sign In">
+
+    <a href="{% url 'register' %}">Don't have an account? SignUp</a>
+</form>
+{% endblock %}

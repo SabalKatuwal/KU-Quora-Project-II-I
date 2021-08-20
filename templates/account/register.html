@@ -1,0 +1,61 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<form action="" method = "POST" id='signup' class = 'wrapper'>
+    {% csrf_token %}
+   
+    <div class="header">
+        <h1>Create account</h1>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}
+        <span class = "message {{message.tags}}">{{message}}</span>
+    {% endif %}
+    {% endfor %} 
+    {% endif %}
+   
+
+    <div class="field" data-valid = "" data-url = "{% url 'validateUsername' %}" >
+        <label for="username">Username</label> 
+        <div class="input">
+            <input type="text" name = "username" id = "username" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <small>Error</small>
+    </div>
+    <div class="field" data-valid = "" data-url = "{% url 'validateEmail' %}">
+        <label for="email">Email</label> 
+        <div class="input">
+            <input type="text" name = "email" id = "email" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <small>Error</small>
+    </div>
+    <div class="field" data-valid = "">
+        <label for="password1">password</label> 
+        <div class="input">
+            <input type="password" name = "password1" id = "password1" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <small>Error</small>
+    </div>
+    <div class="field" data-valid = "">
+        <label for="password2">Confirm password</label> 
+        <div class="input">
+            <input type="password" name = "password2" id = "password2" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <small>Error</small>
+    </div>
+
+    <input type="submit" value = "Sign Up">
+
+    <a href="{% url 'login' %}">Already have an account? SignIn</a>
+
+</form>
+
+{% endblock %}

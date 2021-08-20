@@ -1,0 +1,149 @@
+{% extends 'ku_quora/base.html' %}
+
+{% block title %}
+saved
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    
+{% for post in saved_posts %}
+
+{% load profanity %}
+
+<div class="blog-post" >
+    <div class="header">
+        <div class="profile">
+            <a href="{% url 'profile' post.post.user.id %}"><img src="/media/{{post.post.user.profile.profile_pic}}" alt="" ></a>
+        </div>
+        <div>
+            <span class="author">{{post.post.user.username}}</span>
+            <span class="time-stamp">{{post.post.posted_on}}</span>
+        </div>
+    </div>
+    <div class="body">
+        <h2 class = "title"><a href="{{post.post.get_absolute_url}}">{% with string=post.post.title %} {{ string|censor }}  {% endwith%}</a></h1>
+        <span class="tags">
+           {% for tag  in post.post.tags.all %}
+                <a href="{{tag.get_absolute_url}}">#{% with string=tag.title %} {{ string|censor }}  {% endwith%}</a>
+           {% endfor %}
+        </span>
+        <div class="text"> 
+            {% with string=post.post.body %} {{ string|censor }}  {% endwith%}
+        </div>
+    </div>
+    <div class="images">
+            {% for image in images %}
+                {% if image.post == post.post %}
+                <div class="image">
+                    <a href="/media/{{image.image}}" target = "_blank" ><img src="/media/{{image.image}}" alt=""></a>
+                </div>
+                {% endif %} 
+            {% endfor %}
+    </div>
+    <div id = "footer"class="footer">
+        
+
+        <div class="buttons">
+            <a href="{% url 'post_detail' post.post.id %}#footer"><div class="comment">
+                <i class="fas fa-comment"></i>
+                <span class="count">0</span>
+            </div></a>
+            <div class="options">
+                <div><i class="fas fa-ellipsis-h"></i></div>
+                <ul data-status = 'collapsed'>
+                    {% if request.user == post.post.user %}
+                        <a href="{% url 'post_edit' post.post.id%}"><li><i class="fas fa-pen"></i>Edit</li></a>
+                       <li data-post-id = {{post.post.id}} class = "deletePostBtn"><i class="fas fa-trash"></i>delete post</li>
+                    {% endif %}
+                   <a href=""><li data-post-id = {{post.post.id}} class = "savePostBtn"><i class="fas fa-save"></i></a>
+                        <span>
+                            {% if post.post.id in saved_post_ids %}
+                                 unsave
+                            {% else %}
+                                save
+                            {% endif %}
+                            
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="expand" data-status = 'collapsed'>
+        <span><span class="text">Expand</span><i class="fas fa-arrow-down"></i></span>
+    </div>
+
+
+
+</div>
+
+{% if inDetailView %}
+<div class="answersForm">
+    <form action="">
+        {% csrf_token %}
+        <textarea name="answer" placeholder = "Write your answer here... "id="" cols="30" rows="7"></textarea>
+        <input type="file" id = "images" multiple>
+        <input class = "post_id" type="hidden" value = "{{post.id}}">
+        <button>post answer</button>
+    </form>
+</div>
+{% endif %}
+
+</div>
+
+{% if inDetailView %}
+
+<div class="all-answers">
+
+<h2>Answers:</h2>
+
+{%if not answers.all%}
+    <div class = "noAnswer">No answer yet. Be the first to answer</div>
+{% else %}
+{% for answer in answers.all %}
+    <div class="answer-container">  
+            <div class="header">
+                <div class="profile">
+                    <a href="{% url 'profile' answer.user.id %}"><img src="/media/{{answer.user.profile.profile_pic}}" alt="sdf"></a>
+                </div>
+                <div>
+                    <span class="author">{{answer.user.username}}</span>
+                    <span class="time-stamp">{{answer.time}}</span>
+                </div>
+            </div>
+            <div class="body">
+                {% with string=answer.body %} {{ string|censor }}  {% endwith%}
+            </div>
+            <div class="images">
+                {% for image in answerImages %}
+                    {% if image.answer == answer %}
+                        <a href="/media/{{image.image}}" target="_blank"><img src="/media/{{image.image}}" alt=""></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+    </div>
+{% endfor %}
+    {% endif %}
+
+</div>
+
+<!-- {% comment %} 
+<div class="add answer">
+    <form action='answer/' method="post">
+        {% csrf_token %}
+        <input type="text area" name="answer" placeholder="Enter your ansnwer here">
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+        <input type="submit" value="Submit">
+    </form>
+</div> 
+{% endcomment %} -->
+{% endif %}
+
+{% endfor %}
+
+
+
+{% endblock %}

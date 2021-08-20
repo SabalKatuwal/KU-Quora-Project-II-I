@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'account/following.css' %}">
+    <link rel="stylesheet" href="{% static 'common.css' %}">
+    <link rel="stylesheet" href="{% static 'ku_quora/style.css' %}">
+    <link rel="stylesheet" href="{% static 'account/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'ku_quora/post.css' %}">
+    <link rel="stylesheet" href="{% static 'ku_quora/add-question.css' %}">
+    <link rel="stylesheet" href="{% static 'account/editProfile.css' %}">
+    <link rel="stylesheet" href="{% static 'account/changePassword.css' %}">
+    <link rel="stylesheet" href="{% static 'ku_quora/edit_post.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'notification/notification.css' %}">
+
+</head>
+<body>
+
+
+     {% include 'ku_quora/nav.html' %}
+    <!--{% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}
+                <span class = "message {{message.tags}}">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+     {% endif %} -->
+    {% block content %}
+
+
+    
+    {% endblock %}
+    <audio id='likeDislike' src="{% static 'audio/likeDislike.mp3' %}"></audio>
+    <audio id='notification' src="{% static 'audio/notification.mp3' %}"></audio>
+
+    <script src = "{% static 'common.js' %}"></script>
+    <script src = "{% static 'account/editProfile.js' %}"></script>
+    <script src = "{% static 'ku_quora/add-question.js' %}"></script>
+    <script src = "{% static 'ku_quora/post_answer.js' %}"></script>
+    <script src = "{% static 'notification/notification.js' %}"></script>
+    <script src = "{% static 'account/following.js' %}"></script>
+    <script src = "{% static 'ku_quora/edit_post.js' %}"></script>
+
+</body>
+
+
+</html>

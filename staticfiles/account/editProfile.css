@@ -1,0 +1,120 @@
+.edit_profile_form_container{
+    /* border:1px solid red; */
+    margin-top:10em;
+}
+
+
+form#edit_profile_form > div.field{
+}
+
+form#edit_profile_form{
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+}
+
+form#edit_profile_form {
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    grid-row-gap:5em;
+}
+
+form#edit_profile_form >* {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form#edit_profile_form div.fields{
+}
+form#edit_profile_form div.fields >*{
+    margin:1em 0;
+    width:100%;
+    display:flex;
+}
+
+form#edit_profile_form div.fields >* >*{
+    padding:.5em 1em;
+}
+form#edit_profile_form div.fields >* label{
+   width:40%;
+}
+
+form#edit_profile_form div.fields >* input{
+    width:60%;
+    outline:none;
+    font-size:1.1rem;
+    border:1px solid rgba(197, 197, 197, 0.459);
+ }
+ form#edit_profile_form div.fields >* input:focus{
+    border:1px solid rgba(3, 135, 211, 0.459);
+ }
+
+ form#edit_profile_form  input[type="submit"]{
+    font-size:1.2rem;
+    padding:.6em 1em;
+    background-color:rgb(14, 109, 197);
+    color:white;
+    font-weight:bold;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    opacity:.6;
+ }
+ form#edit_profile_form  input[type="submit"]:hover{
+    opacity:1;
+ }
+form#edit_profile_form > div.profile_pic{
+    height:250px;
+    width:250px;
+    border-radius:50%;
+    position:relative;
+    cursor: pointer;
+    border:10px solid rgb(255, 255, 255);
+    position: relative;
+}
+
+form#edit_profile_form > div.profile_pic >div{
+    position:absolute;
+    bottom:-3em;
+    width:100%;
+    text-align: center;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+form#edit_profile_form > div.profile_pic img{
+    height:230px;
+    width:230px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+form#edit_profile_form .profile_pic >*:not(#profile_pic){
+    position:absolute;
+}
+form#edit_profile_form .profile_pic > input{
+    display:none;
+    z-index:99;
+}
+form#edit_profile_form .profile_pic > label{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+    background-color: rgba(0, 0, 0, 0.315);
+    visibility: hidden;
+}
+form#edit_profile_form .profile_pic:hover label{
+    visibility: visible;
+    cursor: pointer;
+
+}
+
+form#edit_profile_form .profile_pic > label i{
+    font-size:2rem;
+    color:white;
+}
